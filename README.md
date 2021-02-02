@@ -2,18 +2,14 @@
 
 ---
 
-# svelte app
+## Assignment instructions
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+- Take https://www.triplemint.com/listings?listing_type=sale search page and create a very basic version of it using either Svelte, or any other JavaScript framework (Svelte is preferred but not required)
+- Implement a responsive grid with listing cards with just basic css, you don't need to show all of the information.  Include one photo and some listing information.  You're being mostly tested on the layout. 
+- Implement 2 search filters (pick price with min and max and the bedroom filter as a dropdown or as buttons) and 1 sort (price highest and lowest) using client-side javascript (no server calls).  The filter inputs html should be just very basic, just above the listings grid.
+- For the listings data, please use the attached static json.
+- You can use any of the assets on the website: css, images, html
+- Please publish your work as a GitHub repository with instructions how to launch and test the project.
 
 
 ## Get started

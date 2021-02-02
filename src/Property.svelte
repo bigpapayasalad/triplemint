@@ -1,0 +1,1 @@
+<p>Property component</p>

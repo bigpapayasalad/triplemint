@@ -1,30 +1,31 @@
 <script lang="ts">
-	export let name: string;
+	import Search from './Search.svelte';
+	
+	export let imgRoot;
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+<header>
+	<a href="/" class="logo">
+		<img src={`${imgRoot}/logo.svg`} alt="Triplemint logo"> 
+	</a>
+</header>
+<section>
+	<Search/>
+</section>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+	header {
+		height: 4rem;
+		padding: .5rem 1rem;
+		
+		display: flex;
+		align-items: center;
+		background-color: whitesmoke;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.logo {
+		flex: 0 1 8rem;
+		margin-right: auto;
+		transform: translateY(10%);
 	}
 </style>
