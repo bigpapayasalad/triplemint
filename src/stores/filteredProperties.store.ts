@@ -8,24 +8,21 @@ export const filteredPropertiesStoreFactory = (
   return derived(
     [propertiesStore, filterStore],
     ([$properties, $filter]): PropertyI[] => {
-      console.log($properties, $filter);
       return $properties
         ?.filter((p) => {
           if ($filter.minPrice !== undefined && p.price < $filter.minPrice) {
             return false;
-          }
-
-          if ($filter.maxPrice !== undefined && p.price > $filter.maxPrice) {
+          } else if (
+            $filter.maxPrice !== undefined &&
+            p.price > $filter.maxPrice
+          ) {
             return false;
-          }
-
-          if (
+          } else if (
             $filter.minBedrooms !== undefined &&
             p.unit.bedrooms < $filter.minBedrooms
           ) {
             return false;
           }
-
           if (
             $filter.maxBedrooms !== undefined &&
             p.unit.bedrooms > $filter.maxBedrooms

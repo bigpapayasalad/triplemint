@@ -7,7 +7,7 @@
 
 <div class="property-list">
   {#each properties as property}
-    <div class="property">
+    <div class="grid-property">
       <Property {property} />
     </div>
   {/each}
@@ -17,10 +17,12 @@
   .property-list {
     display: flex;
     flex-wrap: wrap;
+    padding: 0.25rem;
   }
 
-  .property {
-    flex: 1 0 25%;
-    height: 12rem;
+  .grid-property {
+    flex: 0 0 20rem;
+    min-height: 12rem;
+    margin: 0.25rem;
   }
 </style>

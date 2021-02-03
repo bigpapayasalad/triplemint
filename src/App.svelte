@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { IMG_ROOT } from "./config";
+
   import Search from "./Search.svelte";
-  export let imgRoot: string;
+
+  let imgRoot = IMG_ROOT;
 </script>
 
 <header>
