@@ -26,11 +26,11 @@
 
   const dispatch = createEventDispatcher();
 
-  function updateFilter(filter: FilterI) {
+  const updateFilter = (filter: FilterI) => {
     dispatch("filterChange", {
       filter,
     });
-  }
+  };
 
   const onFilterChange = (
     field: keyof FilterI,
@@ -40,6 +40,14 @@
     updateFilter({
       ...filter,
       [field]: event.currentTarget.value,
+    });
+  };
+
+  const toggleSort = () => {
+    const sort = filter.sort === "asc" ? "desc" : "asc";
+    updateFilter({
+      ...filter,
+      sort,
     });
   };
 </script>
@@ -105,7 +113,11 @@
   </div>
 </div>
 <div class="sort">
-  <small>Price, desc</small>
+  <small on:click={toggleSort}
+    >Price, {filter.sort === "asc"
+      ? "low to high \u2193"
+      : "high to low \u2191"}</small
+  >
 </div>
 
 <style>
@@ -130,14 +142,14 @@
     color: white;
   }
 
+  .sort small {
+    cursor: pointer;
+  }
+
   .filter-group {
     display: flex;
     margin-right: 3em;
     flex-wrap: wrap;
-  }
-
-  .filter {
-    /* display: flex; */
   }
 
   .filter:not(:last-child) {

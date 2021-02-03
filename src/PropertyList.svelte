@@ -16,13 +16,39 @@
 <style>
   .property-list {
     display: flex;
+    flex-flow: row wrap;
     flex-wrap: wrap;
     padding: 0.25rem;
   }
 
   .grid-property {
-    flex: 0 0 20rem;
+    flex: 0 0 100%;
+
     min-height: 12rem;
-    margin: 0.25rem;
+    padding: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid-property {
+      flex-basis: 50%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .grid-property {
+      flex-basis: 33%;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .grid-property {
+      flex-basis: 25%;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    .grid-property {
+      flex-basis: 20%;
+    }
   }
 </style>
