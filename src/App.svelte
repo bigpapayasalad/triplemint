@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Search from './Search.svelte';
 	
-	export let imgRoot;
+	export let imgRoot: string;
 </script>
 
 <header>
