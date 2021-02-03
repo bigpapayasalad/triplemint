@@ -4,7 +4,7 @@
   import type { FilterI, PropertiesStatsI, PropertyI } from "./types";
 
   export let visibleProperties: PropertyI[] = [];
-  export let propertiesStats: PropertiesStatsI = {
+  export let allPropertiesStats: PropertiesStatsI = {
     minPrice: 0,
     maxPrice: 0,
     minPriceString: "$0",
@@ -59,10 +59,10 @@
       <input
         type="number"
         name="minPrice"
-        value={filter.minPrice || propertiesStats.minPrice}
+        value={filter.minPrice || allPropertiesStats.minPrice}
         on:change={onFilterChange.bind(this, "minPrice")}
-        min={propertiesStats.minPrice}
-        max={propertiesStats.maxPrice}
+        min={allPropertiesStats.minPrice}
+        max={allPropertiesStats.maxPrice}
       />
     </div>
     <div class="filter">
@@ -70,10 +70,10 @@
       <input
         type="number"
         name="maxPrice"
-        value={filter.maxPrice || propertiesStats.maxPrice}
+        value={filter.maxPrice || allPropertiesStats.maxPrice}
         on:change={onFilterChange.bind(this, "maxPrice")}
-        min={propertiesStats.minPrice}
-        max={propertiesStats.maxPrice}
+        min={allPropertiesStats.minPrice}
+        max={allPropertiesStats.maxPrice}
       />
     </div>
   </div>
@@ -83,10 +83,10 @@
       <input
         type="number"
         name="minBedrooms"
-        value={filter.minBedrooms || propertiesStats.minBedrooms}
+        value={filter.minBedrooms || allPropertiesStats.minBedrooms}
         on:change={onFilterChange.bind(this, "minBedrooms")}
-        min={propertiesStats.minBedrooms}
-        max={propertiesStats.maxBedrooms}
+        min={allPropertiesStats.minBedrooms}
+        max={allPropertiesStats.maxBedrooms}
       />
     </div>
     <div class="filter">
@@ -94,10 +94,10 @@
       <input
         type="number"
         name="maxBedrooms"
-        value={filter.maxBedrooms || propertiesStats.maxBedrooms}
+        value={filter.maxBedrooms || allPropertiesStats.maxBedrooms}
         on:change={onFilterChange.bind(this, "maxBedrooms")}
-        min={propertiesStats.minBedrooms}
-        max={propertiesStats.maxBedrooms}
+        min={allPropertiesStats.minBedrooms}
+        max={allPropertiesStats.maxBedrooms}
       />
     </div>
   </div>

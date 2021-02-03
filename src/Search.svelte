@@ -1,40 +1,32 @@
 <script lang="ts">
-  import { writable } from "svelte/store";
-
   import Filters from "./Filters.svelte";
   import PropertyList from "./PropertyList.svelte";
 
-  import propertiesData from "./data/properties.json";
   import type { FilterI, PropertyI } from "./types";
-  import { propertiesStatsStoreFactory } from "./stores/propertiesStats.store";
-  import { filteredPropertiesStoreFactory } from "./stores/filteredProperties.store";
 
-  const filterStore = writable<FilterI>({
-    sort: "desc",
-  });
+  import propertiesData from "./data/properties.json";
 
-  const handleFilterChange = (e: CustomEvent<{ filter: FilterI }>) =>
-    filterStore.set(e.detail.filter);
+  import { getPropertyStats } from "./transforms/propertiesStats";
+  import { filterProperties } from "./transforms/filterProperties";
 
-  const allPropertiesStore = writable<PropertyI[]>(
-    propertiesData as PropertyI[]
-  );
-  const propertiesStatsStore = propertiesStatsStoreFactory(allPropertiesStore);
+  const handleFilterChange = (e: CustomEvent<{ filter: FilterI }>) => {
+    filter = e.detail.filter;
+  };
 
-  const visiblePropertiesStore = filteredPropertiesStoreFactory(
-    allPropertiesStore,
-    filterStore
-  );
-  const visiblePropertiesStatsStore = propertiesStatsStoreFactory(
-    visiblePropertiesStore
-  );
+  let allProperties = propertiesData as PropertyI[];
+  $: allPropertiesStats = getPropertyStats(allProperties);
+
+  let filter: FilterI = { sort: "desc" };
+
+  $: visibleProperties = filterProperties(allProperties, filter);
+  $: visiblePropertiesStats = getPropertyStats(visibleProperties);
 </script>
 
 <Filters
-  visibleProperties={$visiblePropertiesStore}
-  propertiesStats={$propertiesStatsStore}
-  visiblePropertiesStats={$visiblePropertiesStatsStore}
-  filter={$filterStore}
+  {visibleProperties}
+  {allPropertiesStats}
+  {visiblePropertiesStats}
+  {filter}
   on:filterChange={handleFilterChange}
 />
-<PropertyList properties={$visiblePropertiesStore} />
+<PropertyList properties={visibleProperties} />
