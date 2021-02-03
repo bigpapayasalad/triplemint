@@ -104,16 +104,30 @@
     </div>
   </div>
 </div>
+<div class="sort">
+  <small>Price, desc</small>
+</div>
 
 <style>
+  .filters,
+  .sort {
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
   .filters {
     min-height: 4rem;
     padding: 0.5rem 1rem;
 
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     background-color: whitesmoke;
+  }
+
+  .sort {
+    min-height: 2rem;
+    background-color: #00d7a0;
+    color: white;
   }
 
   .filter-group {
