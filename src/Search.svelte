@@ -1,61 +1,40 @@
 <script lang="ts">
-  import { derived, writable } from "svelte/store";
+  import { writable } from "svelte/store";
 
   import Filters from "./Filters.svelte";
   import PropertyList from "./PropertyList.svelte";
 
-  import type { FilterI } from "./types/Filter";
-  import type { PropertyI } from "./types/Property";
-
   import propertiesData from "./data/properties.json";
+  import type { FilterI, PropertyI } from "./types";
+  import { propertiesStatsStoreFactory } from "./stores/propertiesStats.store";
+  import { filteredPropertiesStoreFactory } from "./stores/filteredProperties.store";
 
-  const defaultFilter: FilterI = {
+  const filterStore = writable<FilterI>({
     sort: "desc",
-  };
+  });
+
+  const handleFilterChange = (e: CustomEvent<{ filter: FilterI }>) =>
+    filterStore.set(e.detail.filter);
 
   const allPropertiesStore = writable<PropertyI[]>(
     propertiesData as PropertyI[]
   );
-  const filterStore = derived(
+  const propertiesStatsStore = propertiesStatsStoreFactory(allPropertiesStore);
+
+  const visiblePropertiesStore = filteredPropertiesStoreFactory(
     allPropertiesStore,
-    ($allProperties): FilterI => {
-      const prices = $allProperties.map((p) => p.price);
-      const minPrice = Math.min(...prices);
-      const maxPrice = Math.max(...prices);
-
-      return {
-        ...defaultFilter,
-        minPrice,
-        maxPrice,
-      };
-    }
+    filterStore
   );
-  const visiblePropertiesStore = derived(
-    [allPropertiesStore, filterStore],
-    ([$properties, $filter]): PropertyI[] => {
-      return $properties
-        ?.filter((p) => {
-          if ($filter.minPrice !== undefined && p.price < $filter.minPrice) {
-            return false;
-          }
-
-          if ($filter.maxPrice !== undefined && p.price > $filter.maxPrice) {
-            return false;
-          }
-
-          return true;
-        })
-        .sort((a, b) => {
-          const direction = $filter.sort === "asc" ? 1 : -1;
-          if (a.price < b.price) {
-            return -1 * direction;
-          } else {
-            return 1 * direction;
-          }
-        });
-    }
+  const visiblePropertiesStatsStore = propertiesStatsStoreFactory(
+    visiblePropertiesStore
   );
 </script>
 
-<Filters />
+<Filters
+  visibleProperties={$visiblePropertiesStore}
+  propertiesStats={$propertiesStatsStore}
+  visiblePropertiesStats={$visiblePropertiesStatsStore}
+  filter={$filterStore}
+  on:filterChange={handleFilterChange}
+/>
 <PropertyList properties={$visiblePropertiesStore} />

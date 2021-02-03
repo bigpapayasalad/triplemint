@@ -6,3 +6,4 @@
 
 <p>address: {property.address}</p>
 <p>price: {property.price}</p>
+<p>bedroom: {property.unit.bedrooms}</p>
