@@ -2,23 +2,41 @@ import type { PropertiesStatsI, PropertyI } from "../types";
 import { formatPriceAsCurrency } from "./currency";
 
 export const getPropertyStats = (properties: PropertyI[]): PropertiesStatsI => {
-  const prices = properties.map((p) => p.price);
-  const minPrice = Math.min(...prices);
-  const maxPrice = Math.max(...prices);
+  const reducer = (
+    stats: PropertiesStatsI,
+    property: PropertyI
+  ): PropertiesStatsI => {
+    if (stats.minPrice === null || property.price < stats.minPrice) {
+      stats.minPrice = property.price;
+    }
 
-  const minPriceString = formatPriceAsCurrency(minPrice);
-  const maxPriceString = formatPriceAsCurrency(maxPrice);
+    if (
+      stats.minBedrooms === null ||
+      property.unit.bedrooms < stats.minBedrooms
+    ) {
+      stats.minBedrooms = property.unit.bedrooms;
+    }
 
-  const bedrooms = properties.map((p) => p.unit.bedrooms);
-  const minBedrooms = Math.min(...bedrooms);
-  const maxBedrooms = Math.max(...bedrooms);
+    if (stats.maxPrice === null || property.price > stats.maxPrice) {
+      stats.maxPrice = property.price;
+    }
 
-  return {
-    minPrice,
-    maxPrice,
-    minPriceString,
-    maxPriceString,
-    minBedrooms,
-    maxBedrooms,
+    if (
+      stats.maxBedrooms === null ||
+      property.unit.bedrooms > stats.maxBedrooms
+    ) {
+      stats.maxBedrooms = property.unit.bedrooms;
+    }
+
+    return stats;
   };
+
+  const initial: PropertiesStatsI = {
+    minPrice: null,
+    maxPrice: null,
+    minBedrooms: null,
+    maxBedrooms: null,
+  };
+
+  return properties.reduce<PropertiesStatsI>(reducer, initial);
 };

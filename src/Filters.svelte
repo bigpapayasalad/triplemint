@@ -1,5 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import { formatPriceAsCurrency } from "./transforms/currency";
 
   import type { FilterI, PropertiesStatsI, PropertyI } from "./types";
 
@@ -7,22 +8,22 @@
   export let allPropertiesStats: PropertiesStatsI = {
     minPrice: 0,
     maxPrice: 0,
-    minPriceString: "$0",
-    maxPriceString: "$0",
     minBedrooms: 0,
     maxBedrooms: 0,
   };
   export let visiblePropertiesStats: PropertiesStatsI = {
     minPrice: 0,
     maxPrice: 0,
-    minPriceString: "$0",
-    maxPriceString: "$0",
     minBedrooms: 0,
     maxBedrooms: 0,
   };
   export let filter: FilterI = {
     sort: "desc",
   };
+
+  $: visiblePriceRangeString = `${formatPriceAsCurrency(
+    visiblePropertiesStats.minPrice
+  )} to ${formatPriceAsCurrency(visiblePropertiesStats.maxPrice)}`;
 
   const dispatch = createEventDispatcher();
 
@@ -105,9 +106,7 @@
       <strong>{visibleProperties.length} results</strong>
     </div>
     <div class="details">
-      <small
-        >{visiblePropertiesStats.minPriceString} to {visiblePropertiesStats.maxPriceString}</small
-      >
+      <small>{visiblePriceRangeString}</small>
     </div>
   </div>
 </div>
