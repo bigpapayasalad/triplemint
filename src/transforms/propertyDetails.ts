@@ -2,25 +2,31 @@ import type { PropertyI, Unit } from "../types";
 
 const detailsPriority: (keyof Unit)[] = ["bedrooms", "bathrooms", "surface"];
 const detailUnits: Partial<Record<keyof Unit, string>> = {
-  bedrooms: "BD",
-  bathrooms: "BA",
-  surface: "SF",
+  bedrooms: "bed",
+  bathrooms: "bath",
+  surface: "sqft",
 };
 
 export const buildDetailsString = (property: PropertyI) => {
-  const details = [];
+  const humanizedDetails = [];
 
   for (const detail of detailsPriority) {
-    if (property.unit[detail] !== undefined && property.unit[detail] !== null) {
+    const value = property.unit[detail];
+    if (property.unit[detail] !== undefined && value !== null) {
       const detailUnit = detailUnits[detail];
+      let humanized: string;
 
-      if (!detailUnit) {
-        details.push(property.unit[detail]);
+      if (detail === "bedrooms" && value === 0) {
+        humanized = "Studio";
+      } else if (detailUnit) {
+        humanized = `${value} ${detailUnit}`;
       } else {
-        details.push(`${property.unit[detail]} ${detailUnit}`);
+        humanized = `${value}`;
       }
+
+      humanizedDetails.push(humanized);
     }
   }
 
-  return details.join(", ");
+  return humanizedDetails.join(", ");
 };

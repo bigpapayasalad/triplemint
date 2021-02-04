@@ -37,7 +37,7 @@
 
 <style>
   .property {
-    border: 1px solid #bbbbbb;
+    border: 1px solid #dddddd;
   }
 
   .property-info {
@@ -45,7 +45,7 @@
   }
 
   .address {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 115%;
   }
 
@@ -56,11 +56,11 @@
   }
 
   .price {
-    font-weight: bold;
-    margin-top: 0.25em;
+    font-weight: 600;
   }
 
-  .details {
+  .details,
+  .price {
     margin-top: 0.5em;
   }
 </style>

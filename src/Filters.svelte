@@ -36,7 +36,6 @@
     field: keyof FilterI,
     event: Event & { currentTarget: HTMLInputElement }
   ) => {
-    console.log(filter);
     updateFilter({
       ...filter,
       [field]: event.currentTarget.value,
@@ -114,9 +113,7 @@
 </div>
 <div class="sort">
   <small on:click={toggleSort}
-    >Price, {filter.sort === "asc"
-      ? "low to high \u2193"
-      : "high to low \u2191"}</small
+    >Price, {filter.sort === "asc" ? "low to high" : "high to low"}</small
   >
 </div>
 
@@ -153,7 +150,7 @@
   }
 
   .filter:not(:last-child) {
-    margin-right: 1.5em;
+    margin-right: 1em;
   }
 
   .filter label {

@@ -24,19 +24,38 @@
     : defaultImage}')"
 >
   <div class="controls">
-    <div class="previous" on:click={previous}>&lsaquo;</div>
-    <div class="next" on:click={next}>&rsaquo;</div>
+    {#if currentIndex > 0}
+      <div class="previous" on:click={previous}>&lsaquo;</div>
+    {/if}
+    {#if currentIndex < images.length - 1}
+      <div class="next" on:click={next}>&rsaquo;</div>
+    {/if}
   </div>
+  {#if images.length > 1}
+    <div class="counter">
+      {images.length} photos
+    </div>
+  {/if}
 </div>
 
 <style>
   .images-wrapper {
     height: 10rem;
-    background-position: 50% 50%;
-    background-size: cover;
+    position: relative;
     display: flex;
     align-items: center;
+    background-position: 50% 50%;
+    background-size: cover;
     font-size: 2em;
+  }
+
+  .counter {
+    position: absolute;
+    color: white;
+    bottom: 0.25em;
+    right: 0.25em;
+    font-size: 0.8rem;
+    text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
   }
 
   .controls {
@@ -45,15 +64,21 @@
     flex: 1 1 100%;
     padding: 0.25em;
     color: white;
+    font-size: 2em;
   }
 
   .controls > * {
     opacity: 0.7;
     cursor: pointer;
+    user-select: none;
   }
 
   .controls > *:hover {
     opacity: 1;
+  }
+
+  .next {
+    margin-left: auto;
   }
 
   .medium {
