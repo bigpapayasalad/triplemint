@@ -2,8 +2,6 @@
   import { fade } from "svelte/transition";
   import { cubicInOut } from "svelte/easing";
 
-  import { EASING } from "./config";
-
   import Property from "./Property.svelte";
   import type { PropertyI } from "./types/Property";
 

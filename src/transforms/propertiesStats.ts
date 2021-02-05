@@ -1,5 +1,4 @@
 import type { PropertiesStatsI, PropertyI } from "../types";
-import { formatPriceAsCurrency } from "./currency";
 
 export const getPropertyStats = (properties: PropertyI[]): PropertiesStatsI => {
   const reducer = (

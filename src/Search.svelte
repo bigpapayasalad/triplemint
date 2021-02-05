@@ -6,8 +6,7 @@
 
   import propertiesData from "./data/properties.json";
 
-  import { getPropertyStats } from "./transforms/propertiesStats";
-  import { filterProperties } from "./transforms/filterProperties";
+  import { filterProperties, getPropertyStats } from "./transforms";
 
   const handleFilterChange = (e: CustomEvent<{ filter: FilterI }>) => {
     filter = e.detail.filter;

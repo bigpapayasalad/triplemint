@@ -22,4 +22,4 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). The app should be running, and you'll probably be like "Wow that's pretty good, if I do say so!" when you see it. Probably.
+...and then navigate to [localhost:5000](http://localhost:5000). The app should be running, and you'll probably be like "Wow that's pretty good, if I do say so!" when you see it. Probably.

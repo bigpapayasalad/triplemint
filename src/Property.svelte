@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { beforeUpdate, onMount } from "svelte";
-
   import Images from "./Images.svelte";
-  import { formatPriceAsCurrency } from "./transforms/currency";
-  import { buildDetailsString } from "./transforms/propertyDetails";
-  import type { PropertyI, Unit } from "./types/Property";
+  import { buildDetailsString, formatPriceAsCurrency } from "./transforms";
+  import type { PropertyI } from "./types/Property";
 
   export let property: PropertyI;
 
